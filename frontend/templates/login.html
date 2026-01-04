@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Login</h1>
+  <div class="card">
+    <label for="email">Email</label>
+    <input id="email" type="email" />
+    <label for="password">Password</label>
+    <input id="password" type="password" />
+    <div class="controls">
+      <button id="login">Login</button>
+      <button id="to-register" style="margin-left:8px;">Register</button>
+      <span id="login-msg" class="muted"></span>
+    </div>
+  </div>
+  <script src="/static/js/login.js"></script>
+{% endblock %}

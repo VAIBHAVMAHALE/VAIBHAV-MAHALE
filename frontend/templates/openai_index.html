@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>AI Personal Assistant — OpenAI UI</h1>
+
+  <div id="assistant" class="card">
+    <label for="prompt">Prompt</label>
+    <textarea id="prompt" rows="4" placeholder="Type a prompt..."></textarea>
+    <div class="controls">
+      <button id="send">Send to OpenAI</button>
+      <span id="status" class="muted"></span>
+    </div>
+
+    <h2>Result</h2>
+    <pre id="result" class="result">(no result yet)</pre>
+
+    <h3>Meta</h3>
+    <ul id="meta">
+      <li>Model: <span id="meta-model">—</span></li>
+      <li>Latency (ms): <span id="meta-latency">—</span></li>
+      <li>Total tokens: <span id="meta-total">—</span></li>
+      <li>Prompt tokens: <span id="meta-prompt">—</span></li>
+      <li>Completion tokens: <span id="meta-completion">—</span></li>
+    </ul>
+  </div>
+
+  <script src="/static/js/openai.js"></script>
+{% endblock %}

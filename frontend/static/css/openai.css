@@ -1,0 +1,6 @@
+body{font-family:Helvetica,Arial,sans-serif;background:#fff;color:#111}
+.container{max-width:760px;margin:28px auto}
+.card{background:#fff;border:1px solid #eee;padding:12px;border-radius:6px;margin-bottom:12px}
+.controls{margin-top:12px}
+.muted{color:#666;font-size:0.9em}
+.result{background:#f6f6f6;border:1px solid #eee;padding:8px;border-radius:4px}

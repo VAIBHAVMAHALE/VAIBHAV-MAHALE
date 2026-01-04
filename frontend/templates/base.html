@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>AI Assistant</title>
+    <link rel="stylesheet" href="/static/css/openai.css">
+  </head>
+  <body>
+    <header style="background:#fafafa;border-bottom:1px solid #eee;padding:8px 16px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <div>
+          <a href="/">AI Assistant</a>
+          <a href="/tasks" style="margin-left:12px">Tasks</a>
+          <a href="/openai" style="margin-left:12px">OpenAI</a>
+        </div>
+        <div>
+          <span id="header-user">Not logged in</span>
+          <a id="header-login" href="/login" style="margin-left:8px;">Login</a>
+          <a id="header-register" href="/register" style="margin-left:8px;">Register</a>
+          <button id="header-logout" style="display:none;margin-left:8px;">Logout</button>
+        </div>
+      </div>
+    </header>
+
+    <main style="padding:16px;">
+      {% block content %}{% endblock %}
+    </main>
+
+    <script>window.BACKEND = '{{ backend_url }}';</script>
+    <script src="/static/js/header.js"></script>
+  </body>
+</html>

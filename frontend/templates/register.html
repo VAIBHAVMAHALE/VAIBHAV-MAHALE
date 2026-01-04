@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Register</h1>
+  <div class="card">
+    <label for="email">Email</label>
+    <input id="email" type="email" />
+    <label for="name">Name</label>
+    <input id="name" />
+    <label for="password">Password</label>
+    <input id="password" type="password" />
+    <div class="controls">
+      <button id="register">Create account</button>
+      <button id="to-login" style="margin-left:8px;">Back to login</button>
+      <span id="reg-msg" class="muted"></span>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const regBtn = document.getElementById('register');
+      const toLogin = document.getElementById('to-login');
+      const emailEl = document.getElementById('email');
+      const nameEl = document.getElementById('name');
+      const passEl = document.getElementById('password');
+      const msg = document.getElementById('reg-msg');
+
+      regBtn.addEventListener('click', async () => {
+        msg.textContent = 'Creating...';
+        try {
+          const BACKEND = (window.BACKEND || 'http://127.0.0.1:8000').replace(/\/$/, '');
+          const resp = await fetch(BACKEND + '/auth/register', {
+            method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: emailEl.value, password: passEl.value, name: nameEl.value })
+          });
+          const j = await resp.json();
+          if (resp.ok) {
+            msg.textContent = 'Account created. Redirecting to login...';
+            setTimeout(() => window.location.href = '/login', 900);
+          } else {
+            msg.textContent = j.detail || JSON.stringify(j);
+          }
+        } catch (err) {
+          msg.textContent = 'Request failed: ' + err;
+        }
+      });
+
+      toLogin.addEventListener('click', () => { window.location.href = '/login'; });
+    });
+  </script>
+{% endblock %}
