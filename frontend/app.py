@@ -1,31 +1,46 @@
-from flask import Flask, render_template, send_from_directory
+from flask import Flask, render_template
 import os
 
-app = Flask(__name__, static_folder='static', template_folder='templates')
+# Create Flask app
+app = Flask(
+    __name__,
+    static_folder="static",
+    template_folder="templates"
+)
 
-# Inject BACKEND_URL into all templates. Set via env var BACKEND_URL; fallback to http://127.0.0.1:8000
-_BACKEND_URL = os.environ.get('BACKEND_URL', 'http://127.0.0.1:8000')
+# Backend URL (set in Render Environment Variables)
+# Fallback works for local development
+BACKEND_URL = os.environ.get("BACKEND_URL", "http://127.0.0.1:8000")
 
+
+# Make backend_url available in all templates
 @app.context_processor
-def inject_backend():
-    return dict(backend_url=_BACKEND_URL)
+def inject_backend_url():
+    return {"backend_url": BACKEND_URL}
 
-@app.route('/')
+
+# Routes
+@app.route("/")
 def index():
-    return render_template('openai_index.html')
+    return render_template("openai_index.html")
 
-@app.route('/login')
+
+@app.route("/login")
 def login():
-    return render_template('login.html')
+    return render_template("login.html")
 
-@app.route('/register')
+
+@app.route("/register")
 def register():
-    return render_template('register.html')
+    return render_template("register.html")
 
-@app.route('/tasks')
+
+@app.route("/tasks")
 def tasks():
-    return render_template('tasks.html')
+    return render_template("tasks.html")
 
-if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='127.0.0.1', port=port)
+
+# Run app (IMPORTANT FOR RENDER)
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
